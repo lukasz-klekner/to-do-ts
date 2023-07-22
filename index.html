@@ -7,6 +7,24 @@
     <title>To do app</title>
   </head>
   <body>
+    <main class="main">
+      <form class="form">
+        <label class="form__label" for="task-name">Task:</label>
+        <input
+          class="form__input form__input--js"
+          type="text"
+          id="task-name"
+          name="task-name"
+        />
+        <button class="button button--js">Add</button>
+      </form>
+
+      <section class="section">
+        <h2 class="section__title">To do:</h2>
+        <ul class="section__list section__list--js"></ul>
+      </section>
+    </main>
+
     <script src="dist/app.js"></script>
   </body>
 </html>
