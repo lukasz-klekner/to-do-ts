@@ -28,20 +28,25 @@ const render = () => {
         taskCheckboxElement.id = taskId;
         taskCheckboxElement.name = taskId;
         taskCheckboxElement.checked = task.isDone;
+        taskCheckboxElement.addEventListener("change", () => {
+            task.isDone = !task.isDone;
+        });
         taskElement.appendChild(taskLabelElement);
         taskElement.appendChild(taskCheckboxElement);
         taskContainer.appendChild(taskElement);
+        console.log(tasks);
     });
 };
-const addTask = (taskName) => {
-    tasks.push({
-        name: taskName,
-        isDone: false,
-    });
+const addTask = (task) => {
+    tasks.push(task);
+    taskInputElement.value = "";
 };
 addButtonElement.addEventListener("click", (event) => {
     event.preventDefault();
-    addTask(taskInputElement.value);
+    addTask({
+        name: taskInputElement.value,
+        isDone: false,
+    });
     render();
 });
 render();
