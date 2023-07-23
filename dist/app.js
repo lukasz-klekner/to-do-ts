@@ -1,11 +1,19 @@
+const category = ["general", "hobby", "athletics", "work"];
 const tasks = [
     {
         name: "read a book",
         isDone: false,
+        category: "hobby",
     },
     {
         name: "go for a walk",
         isDone: true,
+        category: "athletics",
+    },
+    {
+        name: "run",
+        isDone: false,
+        category: "athletics",
     },
     {
         name: "prepare meals",
@@ -15,10 +23,34 @@ const tasks = [
 const taskContainer = document.querySelector(".section__list--js");
 const taskInputElement = document.querySelector(".form__input--js");
 const addButtonElement = document.querySelector(".button--js");
+const categoryContainer = document.querySelector(".form__categories-list--js");
+let selectedCategory;
 const render = () => {
     taskContainer.innerHTML = "";
+    categoryContainer.innerHTML = "";
+    category.forEach((categoryName) => {
+        const categoryElement = document.createElement("li");
+        const categoryId = `category-${categoryName}`;
+        const categoryRadioElement = document.createElement("input");
+        categoryRadioElement.type = "radio";
+        categoryRadioElement.name = "category";
+        categoryRadioElement.value = categoryName;
+        categoryRadioElement.id = `${categoryId}`;
+        categoryRadioElement.addEventListener("change", (event) => {
+            selectedCategory = categoryName;
+        });
+        const categoryLabelElement = document.createElement("label");
+        categoryLabelElement.setAttribute("for", `${categoryId}`);
+        categoryLabelElement.innerHTML = categoryName;
+        categoryElement.appendChild(categoryRadioElement);
+        categoryElement.appendChild(categoryLabelElement);
+        categoryContainer.appendChild(categoryElement);
+    });
     tasks.forEach((task) => {
         const taskElement = document.createElement("li");
+        if (task.category) {
+            taskElement.classList.add(task.category);
+        }
         const taskLabelElement = document.createElement("label");
         const taskId = task.name.split(" ").join("-");
         taskLabelElement.setAttribute("for", `${taskId}`);
@@ -34,7 +66,6 @@ const render = () => {
         taskElement.appendChild(taskLabelElement);
         taskElement.appendChild(taskCheckboxElement);
         taskContainer.appendChild(taskElement);
-        console.log(tasks);
     });
 };
 const addTask = (task) => {
@@ -46,6 +77,7 @@ addButtonElement.addEventListener("click", (event) => {
     addTask({
         name: taskInputElement.value,
         isDone: false,
+        category: selectedCategory,
     });
     render();
 });

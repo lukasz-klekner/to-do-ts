@@ -56,13 +56,13 @@ input[type="text"] {
   background: rgba(255, 255, 255, 0.8);
 }
 
-.categories li {
+.form__categories-list li {
   align-items: center;
   display: flex;
   list-style-type: none;
 }
 
-.categories input {
+.form__categories-list input {
   margin-right: 8px;
 }
 
@@ -78,4 +78,17 @@ input[type="text"] {
 
 .section__list input {
   margin-left: 8px;
+}
+
+.athletics {
+  color: darkblue;
+  list-style: circle;
+}
+
+.hobby {
+  color: darkgoldenrod;
+}
+
+.work {
+  text-decoration: underline;
 }
