@@ -1,22 +1,27 @@
 import { Category, Task } from "./types/types";
 
-const category: Category[] = ["general", "hobby", "athletics", "work"];
+const category: Category[] = [
+  Category.GENERAL,
+  Category.ATHLETICS,
+  Category.WORK,
+  Category.HOBBY,
+];
 
 const tasks: Task[] = [
   {
     name: "read a book",
     isDone: false,
-    category: "hobby",
+    category: Category.HOBBY,
   },
   {
     name: "go for a walk",
     isDone: true,
-    category: "athletics",
+    category: Category.ATHLETICS,
   },
   {
     name: "run",
     isDone: false,
-    category: "athletics",
+    category: Category.ATHLETICS,
   },
   {
     name: "prepare meals",
