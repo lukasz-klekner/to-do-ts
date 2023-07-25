@@ -5,11 +5,6 @@ export const renderCategories = (
   categoryContainer: HTMLUListElement,
   updateCategoryCallback: (category: Category) => void
 ) => {
-  console.log({
-    category,
-    categoryContainer,
-    updateCategoryCallback,
-  });
   category.forEach((categoryName) => {
     const categoryElement: HTMLElement = document.createElement("li");
     const categoryId = `category-${categoryName}`;

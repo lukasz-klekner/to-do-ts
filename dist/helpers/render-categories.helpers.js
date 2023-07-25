@@ -1,9 +1,4 @@
 export const renderCategories = (category, categoryContainer, updateCategoryCallback) => {
-    console.log({
-        category,
-        categoryContainer,
-        updateCategoryCallback,
-    });
     category.forEach((categoryName) => {
         const categoryElement = document.createElement("li");
         const categoryId = `category-${categoryName}`;
