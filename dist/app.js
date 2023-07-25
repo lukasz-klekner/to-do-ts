@@ -1,19 +1,25 @@
-const category = ["general", "hobby", "athletics", "work"];
+import { Category } from "./types/types";
+const category = [
+    Category.GENERAL,
+    Category.ATHLETICS,
+    Category.WORK,
+    Category.HOBBY,
+];
 const tasks = [
     {
         name: "read a book",
         isDone: false,
-        category: "hobby",
+        category: Category.HOBBY,
     },
     {
         name: "go for a walk",
         isDone: true,
-        category: "athletics",
+        category: Category.ATHLETICS,
     },
     {
         name: "run",
         isDone: false,
-        category: "athletics",
+        category: Category.ATHLETICS,
     },
     {
         name: "prepare meals",
