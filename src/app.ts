@@ -1,4 +1,5 @@
 import { renderCategories } from "./helpers/render-categories.helpers.js";
+import { renderTasks } from "./helpers/render-tasks.helper.js";
 import { Category, Task } from "./types/types.js";
 
 const category: Category[] = [
@@ -30,7 +31,8 @@ const tasks: Task[] = [
   },
 ];
 
-const taskContainer: HTMLElement = document.querySelector(".section__list--js");
+const taskContainer: HTMLUListElement =
+  document.querySelector(".section__list--js");
 const taskInputElement: HTMLInputElement =
   document.querySelector(".form__input--js");
 const addButtonElement: HTMLButtonElement =
@@ -46,35 +48,7 @@ const render = () => {
 
   renderCategories(category, categoryContainer, updateCategory);
 
-  tasks.forEach((task) => {
-    const taskElement: HTMLElement = document.createElement("li");
-
-    if (task.category) {
-      taskElement.classList.add(task.category);
-    }
-
-    const taskLabelElement: HTMLLabelElement = document.createElement("label");
-    const taskId = task.name.split(" ").join("-");
-
-    taskLabelElement.setAttribute("for", `${taskId}`);
-    taskLabelElement.innerHTML = task.name;
-
-    const taskCheckboxElement: HTMLInputElement =
-      document.createElement("input");
-    taskCheckboxElement.type = "checkbox";
-    taskCheckboxElement.id = taskId;
-    taskCheckboxElement.name = taskId;
-    taskCheckboxElement.checked = task.isDone;
-
-    taskCheckboxElement.addEventListener("change", () => {
-      task.isDone = !task.isDone;
-    });
-
-    taskElement.appendChild(taskLabelElement);
-    taskElement.appendChild(taskCheckboxElement);
-
-    taskContainer.appendChild(taskElement);
-  });
+  renderTasks(tasks, taskContainer);
 };
 
 const addTask = (task: Task) => {
