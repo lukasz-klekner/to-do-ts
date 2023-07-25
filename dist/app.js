@@ -1,4 +1,5 @@
-import { Category } from "./types/types";
+import { renderCategories } from "./helpers/render-categories.helpers.js";
+import { Category } from "./types/types.js";
 const category = [
     Category.GENERAL,
     Category.ATHLETICS,
@@ -34,24 +35,7 @@ let selectedCategory;
 const render = () => {
     taskContainer.innerHTML = "";
     categoryContainer.innerHTML = "";
-    category.forEach((categoryName) => {
-        const categoryElement = document.createElement("li");
-        const categoryId = `category-${categoryName}`;
-        const categoryRadioElement = document.createElement("input");
-        categoryRadioElement.type = "radio";
-        categoryRadioElement.name = "category";
-        categoryRadioElement.value = categoryName;
-        categoryRadioElement.id = `${categoryId}`;
-        categoryRadioElement.addEventListener("change", (event) => {
-            selectedCategory = categoryName;
-        });
-        const categoryLabelElement = document.createElement("label");
-        categoryLabelElement.setAttribute("for", `${categoryId}`);
-        categoryLabelElement.innerHTML = categoryName;
-        categoryElement.appendChild(categoryRadioElement);
-        categoryElement.appendChild(categoryLabelElement);
-        categoryContainer.appendChild(categoryElement);
-    });
+    renderCategories(category, categoryContainer, updateCategory);
     tasks.forEach((task) => {
         const taskElement = document.createElement("li");
         if (task.category) {
@@ -87,4 +71,7 @@ addButtonElement.addEventListener("click", (event) => {
     });
     render();
 });
+const updateCategory = (newCategory) => {
+    selectedCategory = newCategory;
+};
 render();

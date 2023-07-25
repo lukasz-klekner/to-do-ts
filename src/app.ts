@@ -1,4 +1,5 @@
-import { Category, Task } from "./types/types";
+import { renderCategories } from "./helpers/render-categories.helpers.js";
+import { Category, Task } from "./types/types.js";
 
 const category: Category[] = [
   Category.GENERAL,
@@ -34,7 +35,7 @@ const taskInputElement: HTMLInputElement =
   document.querySelector(".form__input--js");
 const addButtonElement: HTMLButtonElement =
   document.querySelector(".button--js");
-const categoryContainer: HTMLElement = document.querySelector(
+const categoryContainer: HTMLUListElement = document.querySelector(
   ".form__categories-list--js"
 );
 let selectedCategory: Category;
@@ -43,31 +44,7 @@ const render = () => {
   taskContainer.innerHTML = "";
   categoryContainer.innerHTML = "";
 
-  category.forEach((categoryName) => {
-    const categoryElement: HTMLElement = document.createElement("li");
-    const categoryId = `category-${categoryName}`;
-
-    const categoryRadioElement: HTMLInputElement =
-      document.createElement("input");
-    categoryRadioElement.type = "radio";
-    categoryRadioElement.name = "category";
-    categoryRadioElement.value = categoryName;
-    categoryRadioElement.id = `${categoryId}`;
-
-    categoryRadioElement.addEventListener("change", (event: Event) => {
-      selectedCategory = categoryName;
-    });
-
-    const categoryLabelElement: HTMLLabelElement =
-      document.createElement("label");
-    categoryLabelElement.setAttribute("for", `${categoryId}`);
-    categoryLabelElement.innerHTML = categoryName;
-
-    categoryElement.appendChild(categoryRadioElement);
-    categoryElement.appendChild(categoryLabelElement);
-
-    categoryContainer.appendChild(categoryElement);
-  });
+  renderCategories(category, categoryContainer, updateCategory);
 
   tasks.forEach((task) => {
     const taskElement: HTMLElement = document.createElement("li");
@@ -114,5 +91,9 @@ addButtonElement.addEventListener("click", (event: Event) => {
   });
   render();
 });
+
+const updateCategory = (newCategory: Category) => {
+  selectedCategory = newCategory;
+};
 
 render();
