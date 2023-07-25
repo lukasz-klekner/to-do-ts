@@ -1,10 +1,4 @@
-interface Task {
-  name: string;
-  isDone: boolean;
-  category?: Category;
-}
-
-type Category = "general" | "hobby" | "athletics" | "work";
+import { Category, Task } from "./types/types";
 
 const category: Category[] = ["general", "hobby", "athletics", "work"];
 
