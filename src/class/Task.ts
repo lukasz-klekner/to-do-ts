@@ -1,4 +1,10 @@
-export class Task {
+import { Category } from "../types/types";
+
+interface Logger {
+  logCreationDate: () => void;
+}
+
+export class TaskClass implements Logger {
   public name: string;
   public isDone: boolean;
   public category?: Category;
@@ -19,11 +25,4 @@ export class Task {
   public logCreationDate() {
     console.log(`This task has been created at ${this.createdAt}`);
   }
-}
-
-export enum Category {
-  GENERAL = "general",
-  HOBBY = "hobby",
-  ATHLETICS = "athletics",
-  WORK = "work",
 }

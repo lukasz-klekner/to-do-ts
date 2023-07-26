@@ -1,6 +1,6 @@
 import { renderCategories } from "./helpers/render-categories.helpers.js";
 import { renderTasks } from "./helpers/render-tasks.helper.js";
-import { Category } from "./types/types.js";
+import { Category, Task } from "./types/types.js";
 const category = [
     Category.GENERAL,
     Category.ATHLETICS,
@@ -8,25 +8,10 @@ const category = [
     Category.HOBBY,
 ];
 const tasks = [
-    {
-        name: "read a book",
-        isDone: false,
-        category: Category.HOBBY,
-    },
-    {
-        name: "go for a walk",
-        isDone: true,
-        category: Category.ATHLETICS,
-    },
-    {
-        name: "run",
-        isDone: false,
-        category: Category.ATHLETICS,
-    },
-    {
-        name: "prepare meals",
-        isDone: false,
-    },
+    new Task("read a book", false, Category.HOBBY),
+    new Task("go for a walk", false, Category.ATHLETICS),
+    new Task("run", true, Category.ATHLETICS),
+    new Task("prepare meals!", false),
 ];
 const taskContainer = document.querySelector(".section__list--js");
 const taskInputElement = document.querySelector(".form__input--js");
@@ -45,11 +30,7 @@ const addTask = (task) => {
 };
 addButtonElement.addEventListener("click", (event) => {
     event.preventDefault();
-    addTask({
-        name: taskInputElement.value,
-        isDone: false,
-        category: selectedCategory,
-    });
+    addTask(new Task(taskInputElement.value, false, selectedCategory));
     render();
 });
 const updateCategory = (newCategory) => {
